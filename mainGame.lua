@@ -64,17 +64,21 @@ local h_dict = {}
 local total_n = 18
 local bonus_n = {1, 2}
 local bonus_kv = {[0] = 0, [1] = 50, [2] = 50}
-local use_n = {10, 11, 12}
-local use_kv = {[10] = 128, [11] = 104, [12] = 156, [13] = 18, [14] = 10}
-local bonus_use_kv = {[11] = 91, [13] = {50, 50, 50, 50, 50}}
+local use_n = {10, 11, 13}
+local use_kv = {[10] = 130, [11] = 100, [12] = 156, [13] = 0, [14] = 10}
+local bonus_use_kv = {[11] = 70, [13] = {38, 38, 38, 38, 38}}
 local shuffle_n = {21, 22, 23}
-local shuffle_kv = {[20] = 102, [21] = 0, [22] = 0, [23] = 0}
+local shuffle_kv = {[20] = 175, [21] = 50, [22] = 0, [23] = 0}
 
 ---glc-a
 ---p1:run_t-75 lsh-70 128/104/156-91   max:128/128/192-114
 ---p2:run_t-55 lsh-70 87/60/72-70      max:87/72/90-88
 
 ---one try:pn_kozue in p1 with 19-4-3(maybe without HSCT_kozue?)
+
+---glc-b
+---run_t-140< lsh-70 130/100/pn_kozue-70
+
 
 
 
@@ -83,7 +87,7 @@ local limit_score_h = 70
 local next_h_b = {}
 
 local init_l, init_n, init_h = 0, 10, 8
-local run_t = 80
+local run_t = 140
 
 math.randomseed(os.time())
 
@@ -239,7 +243,7 @@ local function run()
 			
 			--bonus
 			if bonus_use_kv[u_type] then
-				if type(bonus_use_kv) == "table" then
+				if type(bonus_use_kv[u_type]) == "table" then
 					for i = 1, #bonus_use_kv[u_type] do
 						if next_h_b[i] == nil then
 							next_h_b[i] = 0
@@ -252,7 +256,7 @@ local function run()
 						next_h_b[1] = 0
 					end
 					
-					next_h_b = next_h_b + bonus_use_kv[u_type]
+					next_h_b[1] = next_h_b[1] + bonus_use_kv[u_type]
 				end
 			end
 			
