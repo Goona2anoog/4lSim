@@ -46,7 +46,10 @@ function printLog(...)
 	print(s)
 end
 
-local s_score = 40959
+---glc-a:23815
+---glc-b:40959
+
+local s_score = 23815
 local h_rank = 3.5
 local limit = 2147483648
 local h_num = 10
