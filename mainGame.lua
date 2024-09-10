@@ -65,17 +65,22 @@ local total_n = 18
 local bonus_n = {1, 2}
 local bonus_kv = {[0] = 0, [1] = 50, [2] = 50}
 local use_n = {10, 11, 12}
-local use_kv = {[10] = 128, [11] = 104, [12] = 192, [13] = 18, [14] = 10}
-local bonus_use_kv = {[11] = 114}
+local use_kv = {[10] = 128, [11] = 104, [12] = 156, [13] = 18, [14] = 10}
+local bonus_use_kv = {[11] = 91, [13] = {50, 50, 50, 50, 50}}
 local shuffle_n = {21, 22, 23}
 local shuffle_kv = {[20] = 102, [21] = 0, [22] = 0, [23] = 0}
 
---p1:run_t-85 lsh-70
---p2:run_t-55 lsh-80
+---glc-a
+---p1:run_t-75 lsh-70 128/104/156-91   max:128/128/192-114
+---p2:run_t-55 lsh-70 87/60/72-70      max:87/72/90-88
+
+---one try:pn_kozue in p1 with 19-4-3(maybe without HSCT_kozue?)
+
+
 
 local limit_h = 100
 local limit_score_h = 70
-local next_h_b = 0
+local next_h_b = {}
 
 local init_l, init_n, init_h = 0, 10, 8
 local run_t = 80
@@ -115,7 +120,7 @@ local function init()
 		table.insert(h_dict, table.remove(t_dict, ran_i))
 	end
 	
-	next_h_b = 0
+	next_h_b = {}
 	
 	printLog("init fin.")
 	printLog(l_dict, n_dict, h_dict)
@@ -160,7 +165,11 @@ end
 local function checkAdd(add_list)
 	for _, type in ipairs(add_list) do
 		if type<10 then
-			next_h_b = next_h_b + bonus_kv[type]
+			if next_h_b[1] == nil then
+				next_h_b[1] = 0
+			end
+			
+			next_h_b[1] = next_h_b[1] + bonus_kv[type]
 		end
 	end
 end
@@ -175,9 +184,12 @@ local function HeartCatch(heart_num)
 	if heart_num == 0 then
 		return 0
 	end
-	
-	local heart_num = math.ceil(heart_num*(1+next_h_b/100))
-	next_h_b = 0
+
+	local h_b = 0
+	if #next_h_b > 0 then
+		h_b = table.remove(next_h_b, 1)
+	end
+	local heart_num = math.ceil(heart_num*(1+h_b/100))
 	if heart_num > limit_h then
 		local l_num = limit_h
 		local d_num = math.ceil((heart_num-limit_h)*0.2)
@@ -227,7 +239,21 @@ local function run()
 			
 			--bonus
 			if bonus_use_kv[u_type] then
-				next_h_b = next_h_b + bonus_use_kv[u_type]
+				if type(bonus_use_kv) == "table" then
+					for i = 1, #bonus_use_kv[u_type] do
+						if next_h_b[i] == nil then
+							next_h_b[i] = 0
+						end
+
+						next_h_b[i] = next_h_b[i] + bonus_use_kv[u_type][i]
+					end
+				else
+					if next_h_b[1] == nil then
+						next_h_b[1] = 0
+					end
+					
+					next_h_b = next_h_b + bonus_use_kv[u_type]
+				end
 			end
 			
 			--heart_catch
@@ -341,7 +367,7 @@ printLog("av_u:", t/100)
 printLog("av_n:", tn/100)
 printLog("av_ruri:", tr/100)
 printLog("av_heart:", th/100)
-printLog("will_get_es:", th/(100*limit_score_h)*21)
+printLog("will_get_es:", th/(100*limit_score_h)*21.47483648)
 
 printLog("av_u_d:")
 for k,v in pairs(t_u_d) do
