@@ -381,7 +381,7 @@ for i = 1,100 do
 	end
 end
 
-printLog(\n)
+print("\n")
 printLog("av_u:", t/100)
 printLog("av_n:", tn/100)
 printLog("av_ruri:", tr/100)
