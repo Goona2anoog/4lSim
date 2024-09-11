@@ -77,7 +77,7 @@ local shuffle_kv = {[20] = 175, [21] = 50, [22] = 0, [23] = 0}
 ---one try:pn_kozue in p1 with 19-4-3(maybe without HSCT_kozue?)
 
 ---glc-b
----run_t-140< lsh-70 130/100/pn_kozue-70
+---run_t-110 lsh-70 130/100/pn_kozue-70
 
 
 
@@ -213,8 +213,9 @@ local function HeartCatch(heart_num)
 end
 
 local function run()
-	local collect_u, collect_s, collect_n, collect_h, collect_ruri = 0,0,0,0,0
+	local collect_u, collect_s, collect_n, collect_h = 0,0,0,0
 	local collect_u_d = {}
+	local collect_ruri = {}
 	
 	for i = 1, run_t do
 		local use_i = check(h_dict)
@@ -281,7 +282,11 @@ local function run()
 			local v = shuffle_kv[u_type] or 0
 			heart_catch = HeartCatch(v)
 			if heart_catch > 0 then
-				collect_ruri = collect_ruri + 1
+				if collect_ruri[u_type] == nil then
+					collect_ruri[u_type] = 0
+				end
+
+				collect_ruri[u_type] = collect_ruri[u_type] + 1
 			end
 			collect_h = collect_h + heart_catch
 			
@@ -336,7 +341,9 @@ local function run()
 	printLog("collect_s:", collect_s)
 	printLog("collect_n:", collect_n)
 	printLog("collect_h:", collect_h)
-	printLog("collect_ruri:", collect_ruri)
+	for k,v in pairs(collect_ruri) do
+		printLog(k, v)
+	end
 	for k,v in pairs(collect_u_d) do
 		printLog(k, v)
 	end
@@ -349,14 +356,13 @@ init()
 local t = 0
 local tn = 0
 local th = 0
-local tr = 0
+local tr = {}
 local t_u_d = {}
 for i = 1,100 do
 	local a,b,c,d,e = run()
 	t = t + a
 	tn = tn + b
 	th = th + d
-	tr = tr + e
 	
 	for k,v in pairs(c) do
 		if t_u_d[k] == nil then
@@ -365,13 +371,27 @@ for i = 1,100 do
 		
 		t_u_d[k] = t_u_d[k] + v
 	end
+
+	for k,v in pairs(e) do
+		if tr[k] == nil then
+			tr[k] = 0
+		end
+		
+		tr[k] = tr[k] + v
+	end
 end
 
+printLog(\n)
 printLog("av_u:", t/100)
 printLog("av_n:", tn/100)
 printLog("av_ruri:", tr/100)
 printLog("av_heart:", th/100)
 printLog("will_get_es:", th/(100*limit_score_h)*21.47483648)
+
+printLog("av_ruri:")
+for k,v in pairs(tr) do
+	printLog(k, v/100)
+end
 
 printLog("av_u_d:")
 for k,v in pairs(t_u_d) do
