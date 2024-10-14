@@ -1,8 +1,8 @@
 var window = floaty.window(
-    <frame>
+    <vertical>
         <button id="action1" text="1" w="90" h="40" bg="#77ffffff"/>
         <button id="action2" text="2" w="90" h="40" bg="#77ffffff"/>
-    </frame>
+    </vertical>
 );
 
 window.exitOnClose();
