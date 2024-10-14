@@ -24,22 +24,113 @@ var clickPos = [
     [[1460,2791], [1500, 2600], [1550,2510]],
     [[1686,2818], [1700, 2700], [1735,2590]]];
 
-for (var i=1;i<9;i++)
-{ 
-    var t_func = function(){
+var t_func1 = function(){
         if (ges != null){
             clearImmediate(ges);
             ges = null;
         }
 
         var ges = setImmediate(function(i){
-            gestures([60, 20, clickPos[i-1][0], clickPos[i-1][1]],
-            [100, 20, clickPos[i-1][1], clickPos[i-1][2]],
+            gestures([60, 20, clickPos[0][0], clickPos[0][1]],
+            [100, 20, clickPos[0][1], clickPos[0][2]],
             [140, 20, [1722, 198], [1732, 199]] );
         }, i);
     }
 
-    window["action"+i].click(t_func);
+var t_func2 = function(){
+        if (ges != null){
+            clearImmediate(ges);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(i){
+            gestures([60, 20, clickPos[1][0], clickPos[1][1]],
+            [100, 20, clickPos[1][1], clickPos[1][2]],
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
+    }
+
+var t_func3 = function(){
+        if (ges != null){
+            clearImmediate(ges);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(i){
+            gestures([60, 20, clickPos[2][0], clickPos[2][1]],
+            [100, 20, clickPos[2][1], clickPos[022]],
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
+    }
+
+var t_func4 = function(){
+        if (ges != null){
+            clearImmediate(ges);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(i){
+            gestures([60, 20, clickPos[3][0], clickPos[3][1]],
+            [100, 20, clickPos[3][1], clickPos[3][2]],
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
+    }
+
+var t_func5 = function(){
+        if (ges != null){
+            clearImmediate(ges);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(i){
+            gestures([60, 20, clickPos[4][0], clickPos[4][1]],
+            [100, 20, clickPos[4][1], clickPos[4][2]],
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
+    }
+
+var t_func6 = function(){
+        if (ges != null){
+            clearImmediate(ges);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(i){
+            gestures([60, 20, clickPos[5][0], clickPos[5][1]],
+            [100, 20, clickPos[5][1], clickPos[5][2]],
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
+    }
+
+var t_func7 = function(){
+        if (ges != null){
+            clearImmediate(ges);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(i){
+            gestures([60, 20, clickPos[6][0], clickPos[6][1]],
+            [100, 20, clickPos[6][1], clickPos[6][2]],
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
+    }
+
+var t_func8 = function(){
+        if (ges != null){
+            clearImmediate(ges);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(i){
+            gestures([60, 20, clickPos[7][0], clickPos[7][1]],
+            [100, 20, clickPos[7][1], clickPos[7][2]],
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
+    }
+
+for (var i=1;i<9;i++)
+{ 
+    window["action"+i].click(this["t_func"+i]);
 
     window["action"+i].longClick(()=>{
         window.setAdjustEnabled(!window.isAdjustEnabled());
