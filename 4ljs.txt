@@ -7,18 +7,31 @@ var window = floaty.window(
 window.exitOnClose();
 
 var ges1 = null;
+var pa = null;
 
 window.action.click(()=>{
-    if (ges1 != null){
-        clearImmediate(ges1);
-        ges1 = null;
-    }
+    if (pa == null){
+        if (ges1 != null){
+            clearImmediate(ges1);
+            ges1 = null;
+        }
 
-    var ges1 = setImmediate(function(){
-        gesture(150, [159, 2198], [125, 2093], [113, 1968])
-    });
+        var ges1 = setImmediate(function(){
+            gesture(150, [159, 2198], [125, 2093], [113, 1968]);
+        });
+
+        var pa = setImmediate(function(){
+            swipe(Math.random(1005, 1015), 
+            Math.random(179, 189), 
+            Math.random(1015, 1025), 
+            Math.random(189, 199), 1);
+        });
+    }
+    
 });
 
 window.action.longClick(()=>{
     window.setAdjustEnabled(!window.isAdjustEnabled());
 });
+
+setInterval(()=>{}, 1000);
