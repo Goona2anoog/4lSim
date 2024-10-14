@@ -26,8 +26,8 @@ var clickPos = [
 
 for (var i=1;i<9;i++)
 { 
-    window["action"+i].click(()=>{
-    if (ges != null){
+    var t_func = function(){
+        if (ges != null){
             clearImmediate(ges);
             ges = null;
         }
@@ -37,7 +37,9 @@ for (var i=1;i<9;i++)
             [100, 20, clickPos[i-1][1], clickPos[i-1][2]],
             [140, 20, [1722, 198], [1732, 199]] );
         }, i);
-    });
+    }
+
+    window["action"+i].click(t_func);
 
     window["action"+i].longClick(()=>{
         window.setAdjustEnabled(!window.isAdjustEnabled());
