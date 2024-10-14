@@ -1,37 +1,42 @@
 var window = floaty.window(
     <frame>
-        <button id="action" text="start" w="90" h="40" bg="#77ffffff"/>
+        <button id="action1" text="1" w="90" h="40" bg="#77ffffff"/>
+        <button id="action2" text="2" w="90" h="40" bg="#77ffffff"/>
     </frame>
 );
 
 window.exitOnClose();
 
-var ges1 = null;
-var pa = null;
+var ges = null;
 
-window.action.click(()=>{
-    if (pa == null){
-        if (ges1 != null){
+window.action1.click(()=>{
+    if (ges != null){
             clearImmediate(ges1);
-            ges1 = null;
+            ges = null;
         }
 
-        var ges1 = setImmediate(function(){
-            gesture(150, [159, 2198], [125, 2093], [113, 1968]);
-        });
-
-        var pa = setImmediate(function(){
-            swipe(Math.random(1005, 1015), 
-            Math.random(179, 189), 
-            Math.random(1015, 1025), 
-            Math.random(189, 199), 1);
-        });
-    }
-    
+        var ges = setImmediate(function(){
+            gestures([60, 20, [159, 2198], [125, 2093]],
+            [100, 20, [125, 2093], [113, 1968]],
+            [140, 20, [159, 2198], [125, 2093]] );
+    });
 });
 
-window.action.longClick(()=>{
+window.action1.longClick(()=>{
     window.setAdjustEnabled(!window.isAdjustEnabled());
+});
+
+window.action2.click(()=>{
+    if (ges != null){
+            clearImmediate(ges1);
+            ges = null;
+        }
+
+        var ges = setImmediate(function(){
+            gestures([60, 20, [268, 2182], [240, 2100]],
+            [100, 20, [240, 2100], [230, 2042]],
+            [140, 20, [159, 2198], [125, 2093]] );
+    });
 });
 
 setInterval(()=>{}, 1000);
