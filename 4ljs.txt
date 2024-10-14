@@ -1,28 +1,28 @@
 var window = floaty.window(
-    <horizontal>
-        <button id="action1" text="1" w="110" h="70" bg="#77ffffff"/>
-        <button id="action2" text="2" w="110" h="70" bg="#77ffffff"/>
-        <button id="action3" text="3" w="110" h="70" bg="#77ffffff"/>
-        <button id="action4" text="4" w="110" h="70" bg="#77ffffff"/>
-        <button id="action5" text="5" w="110" h="70" bg="#77ffffff"/>
-        <button id="action6" text="6" w="110" h="70" bg="#77ffffff"/>
-        <button id="action7" text="7" w="110" h="70" bg="#77ffffff"/>
-        <button id="action8" text="8" w="110" h="70" bg="#77ffffff"/>
-    </horizontal>
+    <vertical>
+        <button id="action1" text="1" w="110" h="80" bg="#77ffffff"/>
+        <button id="action2" text="2" w="110" h="80" bg="#77ffffff"/>
+        <button id="action3" text="3" w="110" h="80" bg="#77ffffff"/>
+        <button id="action4" text="4" w="110" h="80" bg="#77ffffff"/>
+        <button id="action5" text="5" w="110" h="80" bg="#77ffffff"/>
+        <button id="action6" text="6" w="110" h="80" bg="#77ffffff"/>
+        <button id="action7" text="7" w="110" h="80" bg="#77ffffff"/>
+        <button id="action8" text="8" w="110" h="80" bg="#77ffffff"/>
+    </vertical>
 );
 
 window.exitOnClose();
 
 var ges = null;
 var clickPos = [
-    [[159, 2198], [125, 2093], [113, 1968]],
-    [[268, 2182], [240, 2100], [230, 2042]],
-    [[359, 2140], [356, 2080], [355, 2012]],
-    [[496, 2133], [496, 2100], [496, 2040]],
-    [[602, 2144], [605, 2080], [609, 2002]],
-    [[722, 2144], [730, 2070], [740, 2008]],
-    [[835, 2152], [840, 2100], [856, 2044]],
-    [[964, 2213], [975, 2100], [994, 2054]],];
+    [[405,2801], [370, 2700], [358,2583]],
+    [[597,2798], [570, 2600], [561,2498]],
+    [[769,2746], [760, 2600], [753,2480]],
+    [[945,2746], [944, 2600], [943,2470]],
+    [[1120,2750], [1140, 2600], [1156,2432]],
+    [[1300,2743], [1325, 2600], [1350,2445]],
+    [[1460,2791], [1500, 2600], [1550,2510]],
+    [[1686,2818], [1700, 2700], [1735,2590]]];
 
 for (var i=1;i<9;i++)
 { 
@@ -32,11 +32,11 @@ for (var i=1;i<9;i++)
             ges = null;
         }
 
-        var ges = setImmediate(function(){
+        var ges = setImmediate(function(i){
             gestures([60, 20, clickPos[i-1][0], clickPos[i-1][1]],
             [100, 20, clickPos[i-1][1], clickPos[i-1][2]],
-            [140, 20, [1010, 184], [1015, 189]] );
-        });
+            [140, 20, [1722, 198], [1732, 199]] );
+        }, i);
     });
 
     window["action"+i].longClick(()=>{
